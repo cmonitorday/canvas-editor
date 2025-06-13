@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Editor Client</title>
+  <link rel="stylesheet" href="../src/style.css">
+</head>
+<body>
+  <div class="editor"></div>
+  <script src="./canvas-editor.js"></script>
+  <script>
+    const container = document.querySelector('.editor');
+    const Editor = window['canvas-editor'].default;
+    const instance = new Editor(container, {
+      main: [{ value: 'Hello from client-side JS' }]
+    });
+    console.log('Editor instance', instance);
+  </script>
+</body>
+</html>
