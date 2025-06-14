@@ -21328,8 +21328,22 @@ ${P || `${M + 1}.`}${t(O)}${
     (a.createDomFromElementList = oe),
     (a.default = li),
     (a.getElementListByHTML = se),
-    (a.getTextFromElementList = le),
+  (a.getTextFromElementList = le),
         Object.defineProperty(a, '__esModule', { value: !0 }),
     (a[Symbol.toStringTag] = 'Module')
-})
+})()
+
+// Additional helper methods exposed for worker-friendly APIs
+;(function () {
+  const CanvasEditor = window['canvas-editor']
+  CanvasEditor.countWords = function (editor) {
+    return editor.getWordCount()
+  }
+  CanvasEditor.buildCatalog = function (editor) {
+    return editor.getCatalog()
+  }
+  CanvasEditor.fetchGroupIds = function (editor) {
+    return editor.getGroupIds()
+  }
+})()
 //# sourceMappingURL=canvas-editor.umd.js.map

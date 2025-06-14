@@ -6,8 +6,13 @@
  * @param {import('./editor.js').WordProcessor} editor
  * @returns {Promise<number>} word count
  */
+const CanvasEditor = window['canvas-editor'];
+
+/**
+ * Count the number of words using the editor's worker helpers.
+ */
 export function countWords(editor) {
-  return editor.getWordCount();
+  return CanvasEditor.countWords(editor);
 }
 
 /**
@@ -16,7 +21,7 @@ export function countWords(editor) {
  * @returns {Promise<import('../src/editor/interface/Catalog').ICatalog|null>}
  */
 export function buildCatalog(editor) {
-  return editor.getCatalog();
+  return CanvasEditor.buildCatalog(editor);
 }
 
 /**
@@ -25,5 +30,5 @@ export function buildCatalog(editor) {
  * @returns {Promise<string[]>}
  */
 export function fetchGroupIds(editor) {
-  return editor.getGroupIds();
+  return CanvasEditor.fetchGroupIds(editor);
 }
