@@ -22,11 +22,13 @@
     </div>
   </div>
   <div class="editor"></div>
+  <button id="countWords">Word Count</button>
+  <span id="wordCountResult"></span>
   <!-- Load the bundled editor first -->
   <script type="module" src="./canvas-editor.js"></script>
   <!-- Use ES modules to load the wrapper API -->
   <script type="module">
-    import { WordProcessor } from './index.js';
+    import { WordProcessor, countWords } from './index.js';
 
     const container = document.querySelector('.editor');
     const editor = new WordProcessor(container, {
@@ -99,6 +101,15 @@
     tablePanel.onclick = () => {
       editor.command.executeInsertTable(rowIndex, colIndex);
       recoveryTable();
+    };
+
+    const countBtn = document.getElementById('countWords');
+    const result = document.getElementById('wordCountResult');
+
+    countBtn.onclick = async () => {
+      result.textContent = '...';
+      const total = await countWords(editor);
+      result.textContent = `${total} words`;
     };
 
     console.log('Editor instance', editor);
