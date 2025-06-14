@@ -21344,8 +21344,7 @@ ${P || `${M + 1}.`}${t(O)}${
     (a.default = li),
     (a.getElementListByHTML = se),
     (a.getTextFromElementList = le),
-    (a.splitText = Zt),
-    Object.defineProperty(a, '__esModule', { value: !0 }),
+        Object.defineProperty(a, '__esModule', { value: !0 }),
     (a[Symbol.toStringTag] = 'Module')
 })
 //# sourceMappingURL=canvas-editor.umd.js.map

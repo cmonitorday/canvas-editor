@@ -2,6 +2,7 @@
 // These functions operate on the editor's element data structures.
 
 const CanvasEditor = window['canvas-editor'];
+import splitText from './splitText.js';
 
 /** Convert an element list to a DOM structure. */
 export const createDomFromElements = CanvasEditor.createDomFromElementList;
@@ -12,5 +13,5 @@ export const extractElementsFromHTML = CanvasEditor.getElementListByHTML;
 /** Extract plain text from an element list. */
 export const extractTextFromElements = CanvasEditor.getTextFromElementList;
 
-/** Split text into the editor's internal representation. */
-export const splitPlainText = CanvasEditor.splitText;
+/** Split text into characters. */
+export const splitPlainText = splitText;
