@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Editor Client</title>
+  <link rel="stylesheet" href="../src/style.css">
+</head>
+<body>
+  <div class="editor"></div>
+  <!-- Load the bundled editor first -->
+  <script src="./canvas-editor.js"></script>
+  <!-- Use ES modules to load the wrapper API -->
+  <script type="module">
+    import { WordProcessor } from './index.js';
+
+    const container = document.querySelector('.editor');
+    const editor = new WordProcessor(container, {
+      main: [{ value: 'Hello from client-side JS' }]
+    });
+    console.log('Editor instance', editor);
+  </script>
+</body>
+</html>
