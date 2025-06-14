@@ -21330,8 +21330,8 @@ ${P || `${M + 1}.`}${t(O)}${
     (a.getElementListByHTML = se),
   (a.getTextFromElementList = le),
         Object.defineProperty(a, '__esModule', { value: !0 }),
-    (a[Symbol.toStringTag] = 'Module')
-})()
+    (a[Symbol.toStringTag] = 'Module'))
+});
 
 // Additional helper methods exposed for worker-friendly APIs
 ;(function () {
