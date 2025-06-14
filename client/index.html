@@ -6,6 +6,21 @@
   <link rel="stylesheet" href="../src/style.css">
 </head>
 <body>
+  <div class="menu">
+    <div class="menu-item">
+      <div class="menu-item__table">
+        <i title="表格"></i>
+      </div>
+      <div class="menu-item__table__collapse">
+        <div class="table-close">×</div>
+        <div class="table-title">
+          <span class="table-select">插入</span>
+          <span>表格</span>
+        </div>
+        <div class="table-panel"></div>
+      </div>
+    </div>
+  </div>
   <div class="editor"></div>
   <!-- Load the bundled editor first -->
   <script type="module" src="./canvas-editor.js"></script>
@@ -17,6 +32,75 @@
     const editor = new WordProcessor(container, {
       main: [{ value: 'Hello from client-side JS' }]
     });
+
+    // ----- Table insertion UI -----
+    const tableBtn = document.querySelector('.menu-item__table');
+    const tablePanelContainer = document.querySelector('.menu-item__table__collapse');
+    const tableClose = document.querySelector('.table-close');
+    const tableTitle = document.querySelector('.table-select');
+    const tablePanel = document.querySelector('.table-panel');
+    const tableCellList = [];
+
+    for (let i = 0; i < 10; i++) {
+      const tr = document.createElement('tr');
+      tr.classList.add('table-row');
+      const trCells = [];
+      for (let j = 0; j < 10; j++) {
+        const td = document.createElement('td');
+        td.classList.add('table-cel');
+        tr.append(td);
+        trCells.push(td);
+      }
+      tablePanel.append(tr);
+      tableCellList.push(trCells);
+    }
+
+    let colIndex = 0;
+    let rowIndex = 0;
+
+    function removeAllTableCellSelect() {
+      tableCellList.forEach(row => row.forEach(td => td.classList.remove('active')));
+    }
+
+    function setTableTitle(payload) {
+      tableTitle.innerText = payload;
+    }
+
+    function recoveryTable() {
+      removeAllTableCellSelect();
+      setTableTitle('插入');
+      colIndex = 0;
+      rowIndex = 0;
+      tablePanelContainer.style.display = 'none';
+    }
+
+    tableBtn.onclick = () => {
+      tablePanelContainer.style.display = 'block';
+    };
+
+    tablePanel.onmousemove = evt => {
+      const celSize = 16;
+      const rowMarginTop = 10;
+      const celMarginRight = 6;
+      const { offsetX, offsetY } = evt;
+      removeAllTableCellSelect();
+      colIndex = Math.ceil(offsetX / (celSize + celMarginRight)) || 1;
+      rowIndex = Math.ceil(offsetY / (celSize + rowMarginTop)) || 1;
+      tableCellList.forEach((tr, trIndex) => {
+        tr.forEach((td, tdIndex) => {
+          if (tdIndex < colIndex && trIndex < rowIndex) td.classList.add('active');
+        });
+      });
+      setTableTitle(`${rowIndex}×${colIndex}`);
+    };
+
+    tableClose.onclick = () => recoveryTable();
+
+    tablePanel.onclick = () => {
+      editor.command.executeInsertTable(rowIndex, colIndex);
+      recoveryTable();
+    };
+
     console.log('Editor instance', editor);
   </script>
 </body>
