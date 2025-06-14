@@ -1,3 +1,4 @@
+import splitText from "./splitText.js";
 ;(() => {
   ;(function () {
     'use strict'
@@ -194,22 +195,6 @@ var L = (a, dt, Ft) => (cn(a, typeof dt != 'symbol' ? dt + '' : dt, Ft), Ft)
       return (((1 + Math.random()) * 65536) | 0).toString(16).substring(1)
     }
     return l() + l() + '-' + l() + '-' + l() + '-' + l() + '-' + l() + l() + l()
-  }
-  function Zt(l) {
-    const t = []
-    if (Intl.Segmenter) {
-      const n = new Intl.Segmenter().segment(l)
-      for (const { segment: o } of n) t.push(o)
-    } else {
-      const e = new Map()
-      for (const o of l.matchAll(Oi)) e.set(o.index, o[0])
-      let n = 0
-      for (; n < l.length; ) {
-        const o = e.get(n)
-        o ? (t.push(o), (n += o.length)) : (t.push(l[n]), n++)
-      }
-    }
-    return t
   }
   function Tn(l, t) {
     const e = document.createElement('a')
@@ -3844,7 +3829,7 @@ trailer
     const t = []
     for (let e = 0; e < l.length; e++) {
       const n = l[e],
-        o = Zt(n.value)
+        o = splitText(n.value)
       for (let s = 0; s < o.length; s++) t.push(v(C({}, n), { value: o[s] }))
     }
     return t
@@ -4028,7 +4013,7 @@ trailer
         const X = Ut(R, [...Nn, ...$t]),
           f = Ut(R.control, xt),
           Q = v(C({}, f), { color: o.control.bracketColor }),
-          Z = Zt(c || S.prefix)
+          Z = splitText(c || S.prefix)
         for (let Y = 0; Y < Z.length; Y++) {
           const V = Z[Y]
           l.splice(
@@ -4045,7 +4030,7 @@ trailer
             i++
         }
         if (h) {
-          const Y = Zt(h)
+          const Y = splitText(h)
           for (let V = 0; V < Y.length; V++) {
             const W = Y[V]
             l.splice(
@@ -4095,7 +4080,7 @@ trailer
                   })
                 ),
                   i++
-                const y = Zt(m.value)
+                const y = splitText(m.value)
                 for (let K = 0; K < y.length; K++) {
                   const b = y[K],
                     w = K === y.length - 1
@@ -4145,7 +4130,7 @@ trailer
                   })
                 ),
                   i++
-                const m = Zt(U.value)
+                const m = splitText(U.value)
                 for (let y = 0; y < m.length; y++) {
                   const K = m[y],
                     b = y === m.length - 1
@@ -4203,7 +4188,7 @@ trailer
           }
         } else if (T) {
           const Y = v(C({}, f), { color: o.control.placeholderColor }),
-            V = Zt(T)
+            V = splitText(T)
           for (let W = 0; W < V.length; W++) {
             const p = V[W]
             l.splice(
@@ -4226,7 +4211,7 @@ trailer
           }
         }
         if (u) {
-          const Y = Zt(u)
+          const Y = splitText(u)
           for (let V = 0; V < Y.length; V++) {
             const W = Y[V]
             l.splice(
@@ -4243,7 +4228,7 @@ trailer
               i++
           }
         }
-        const D = Zt(d || S.postfix)
+        const D = splitText(d || S.postfix)
         for (let Y = 0; Y < D.length; Y++) {
           const V = D[Y]
           l.splice(
@@ -4265,7 +4250,7 @@ trailer
         ((r = R.value) == null ? void 0 : r.length) > 1
       ) {
         l.splice(i, 1)
-        const c = Zt(R.value)
+        const c = splitText(R.value)
         for (let d = 0; d < c.length; d++)
           l.splice(i + d, 0, v(C({}, R), { value: c[d] }))
         R = l[i]
@@ -7089,7 +7074,7 @@ ${P || `${M + 1}.`}${t(O)}${
       S = i.getRangeAnchorStyle(M, O)
     if (!S) return
     const I = e.isDesignMode(),
-      F = Zt(T).map(Z => {
+      F = splitText(T).map(Z => {
         var Y, V
         const D = { value: Z }
         if (
@@ -11311,7 +11296,7 @@ ${P || `${M + 1}.`}${t(O)}${
       R || this.control.removePlaceholder(P, e)
       const O = bt(o[P], yt),
         M = P + 1,
-        S = Zt(u),
+        S = splitText(u),
         I = this.control.getDraw()
       for (let N = 0; N < S.length; N++) {
         const X = v(C(C({}, T), O), {
@@ -12716,7 +12701,7 @@ ${P || `${M + 1}.`}${t(O)}${
         o = n[t],
         s = o.control
       if (!s.placeholder) return
-      const i = Zt(s.placeholder),
+      const i = splitText(s.placeholder),
         r = Ut(o, xt)
       for (let R = 0; R < i.length; R++) {
         const c = i[R],
